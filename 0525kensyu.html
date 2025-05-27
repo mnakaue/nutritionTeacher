@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栄養教諭のための生成AI活用研修教材</title>
+    <style>
+/**
+Markdownをhtmlレンダリングしたものに適用するスタイルシート
+ */
+
+/* 基本変数 - 拡張版 */
+:root {
+  /* 背景色と基本テキスト */
+  --claude-bg: #fafafa;
+  --claude-text: #141414;
+  --claude-text-secondary: #5a5a5a;
+  --claude-text-tertiary: #757575;
+  
+  /* 境界線と区切り */
+  --claude-border: #e1e1e1;
+  --claude-border-light: #efefef;
+  --claude-border-focus: #c8c8c8;
+  
+  /* コード関連 */
+  --claude-code-bg: #f3f3f3;
+  --claude-code-border: #e5e5e5;
+  --claude-pre-bg: #f8f8fa;
+  
+  /* コンテナとメッセージ */
+  --claude-light-bg: #ffffff;
+  --claude-message-bg: #ffffff;
+  --claude-message-shadow: rgba(0, 0, 0, 0.05);
+  
+  /* ブロック要素 */
+  --claude-blockquote-bg: #f3f3f3;
+  --claude-table-header-bg: #f5f5f5;
+  --claude-table-row-alt: #fafafa;
+  
+  /* アクセント色 */
+  --claude-link: #5d60ef;
+  --claude-hover: #4a4dde;
+  --claude-active: #3a3dc8;
+  --claude-focus: #6366f1;
+  
+  /* 状態色 */
+  --claude-success: #0d9488;
+  --claude-warning: #ca8a04;
+  --claude-error: #dc2626;
+  --claude-info: #2563eb;
+  
+  /* シンタックスハイライト */
+  --claude-syntax-keyword: #cf222e;
+  --claude-syntax-entity: #6639ba;
+  --claude-syntax-constant: #0550ae;
+  --claude-syntax-string: #0a3069;
+  --claude-syntax-variable: #8a4600;
+  --claude-syntax-comment: #6e7781;
+  --claude-syntax-tag: #116329;
+  --claude-syntax-attribute: #0550ae;
+  
+  /* フォント設定 */
+  --claude-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --claude-font-code: "SF Mono", "SFMono-Regular", Consolas, "DejaVu Sans Mono", "Liberation Mono", Menlo, Courier, monospace;
+  --claude-font-size-base: 16px;
+  --claude-font-size-sm: 14px;
+  --claude-font-size-xs: 12px;
+  --claude-font-size-lg: 18px;
+  --claude-font-size-xl: 20px;
+  --claude-font-size-2xl: 24px;
+  --claude-letter-spacing: -0.01em;
+  --claude-letter-spacing-tight: -0.02em;
+  --claude-letter-spacing-wide: 0.01em;
+}
+
+/* Webフォントの読み込み - 拡張版 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 基本スタイル */
+body {
+  font-family: var(--claude-font-primary);
+  font-size: var(--claude-font-size-base);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: var(--claude-letter-spacing);
+  color: var(--claude-text);
+  background-color: var(--claude-bg);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* メインコンテンツ */
+.claude-markdown-content {
+  background-color: var(--claude-message-bg);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--claude-message-shadow);
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* 見出し - フォント調整強化 */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.2;
+  font-family: var(--claude-font-primary);
+  letter-spacing: var(--claude-letter-spacing-tight);
+  color: var(--claude-text);
+}
+
+h1 { 
+  font-size: var(--claude-font-size-2xl); 
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h2 { 
+  font-size: var(--claude-font-size-xl); 
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+h3 { 
+  font-size: var(--claude-font-size-lg); 
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+h4 { 
+  font-size: var(--claude-font-size-base);
+  font-weight: 600;
+}
+
+h5 { 
+  font-size: var(--claude-font-size-base);
+  font-weight: 500;
+}
+
+h6 { 
+  font-size: var(--claude-font-size-sm);
+  font-weight: 500;
+  color: var(--claude-text-secondary);
+}
+
+/* 段落 - 精密調整 */
+p {
+  margin-bottom: 0.8em;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: var(--claude-letter-spacing);
+  color: var(--claude-text);
+  font-size: var(--claude-font-size-base);
+}
+
+/* リンク - 状態の詳細化 */
+a {
+  color: var(--claude-link);
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+a:hover {
+  color: var(--claude-hover);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--claude-active);
+}
+
+a:focus {
+  color: var(--claude-focus);
+  outline: 2px solid rgba(93, 96, 239, 0.3);
+  outline-offset: 2px;
+}
+
+/* リスト */
+ul, ol {
+  margin-bottom: 0.8em;
+  padding-left: 2em;
+  line-height: 1.4;
+}
+
+li {
+  margin-bottom: 0.3em;
+  letter-spacing: var(--claude-letter-spacing);
+}
+
+/* ネストされたリスト */
+li > ul, li > ol {
+  margin-top: 0.3em;
+  margin-bottom: 0;
+}
+
+/* 引用ブロック - 精密調整 */
+blockquote {
+  border-left: 3px solid var(--claude-border);
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0.6em 1em;
+  color: var(--claude-text-secondary);
+  background-color: var(--claude-blockquote-bg);
+  border-radius: 0 4px 4px 0;
+  font-size: var(--claude-font-size-base);
+  line-height: 1.4;
+  letter-spacing: var(--claude-letter-spacing);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* コードブロック - 強化版 */
+pre {
+  background-color: var(--claude-pre-bg);
+  border: 1px solid var(--claude-code-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  position: relative;
+  font-family: var(--claude-font-code);
+}
+
+code {
+  font-family: var(--claude-font-code);
+  font-size: 0.9em;
+  background-color: var(--claude-code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  letter-spacing: var(--claude-letter-spacing-tight);
+  color: var(--claude-text);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  tab-size: 4;
+  hyphens: none;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+}
+
+/* シンタックスハイライト - 詳細カラースキーム */
+.highlight .keyword, 
+.highlight .k,
+.highlight .kd,
+.highlight .kn {
+  color: var(--claude-syntax-keyword);
+}
+
+.highlight .function,
+.highlight .nf,
+.highlight .nx,
+.highlight .nc {
+  color: var(--claude-syntax-entity);
+}
+
+.highlight .constant,
+.highlight .o,
+.highlight .mi,
+.highlight .mf,
+.highlight .bp,
+.highlight .no {
+  color: var(--claude-syntax-constant);
+}
+
+.highlight .string,
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sr {
+  color: var(--claude-syntax-string);
+}
+
+.highlight .variable,
+.highlight .n,
+.highlight .nb {
+  color: var(--claude-syntax-variable);
+}
+
+.highlight .comment,
+.highlight .c,
+.highlight .c1,
+.highlight .cm {
+  color: var(--claude-syntax-comment);
+  font-style: italic;
+}
+
+.highlight .tag,
+.highlight .nt {
+  color: var(--claude-syntax-tag);
+}
+
+.highlight .attr,
+.highlight .na {
+  color: var(--claude-syntax-attribute);
+}
+
+/* Claudeコードブロック - 精密調整 */
+.claude-code {
+  position: relative;
+  background-color: var(--claude-pre-bg);
+  border-radius: 8px;
+  margin: 0.8em 0;
+}
+
+/* 言語タグ表示 */
+.code-language-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 8px;
+  background-color: rgba(0,0,0,0.06);
+  color: var(--claude-text-tertiary);
+  border-radius: 0 6px 0 4px;
+  font-size: var(--claude-font-size-xs);
+  font-family: var(--claude-font-primary);
+  font-weight: 500;
+}
+
+/* テーブル関連 - 列幅を内容に応じて調整するよう修正 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 0.8em;
+  table-layout: auto; /* 内容に応じた列幅にするため fixed から auto に変更 */
+  overflow-x: auto;
+  page-break-inside: avoid;
+  font-size: var(--claude-font-size-sm);
+  line-height: 1.3;
+  border: 1px solid var(--claude-border);
+}
+
+/* テーブルコンテナ（横スクロール対応） */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 0.8em;
+  border-radius: 6px;
+  border: 1px solid var(--claude-border);
+}
+
+.table-container table {
+  border: none;
+  margin-bottom: 0;
+}
+
+/* テーブルのセル */
+th, td {
+  border: 1px solid var(--claude-border);
+  padding: 6px 8px;
+  text-align: left;  /* すべて左揃えに統一 */
+  line-height: 1.3;
+  vertical-align: top;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal; /* テキストの折り返しを許可 */
+  min-width: 2em; /* セルの最小幅を設定 */
+}
+
+/* 数値データのセル用スタイル - 左揃えに修正 */
+td.numeric {
+  text-align: left;  /* 右揃えから左揃えに変更 */
+  white-space: normal; /* 折り返し設定を一般のセルと同じに */
+}
+
+/* テーブルのヘッダー */
+th {
+  background-color: var(--claude-table-header-bg);
+  font-weight: 600;
+  color: var(--claude-text);
+  font-size: var(--claude-font-size-sm);
+  letter-spacing: var(--claude-letter-spacing-tight);
+  position: sticky;
+  top: 0;
+  white-space: normal; /* ヘッダーテキストの折り返しを許可 */
+}
+
+/* テーブルの偶数行 */
+tr:nth-child(even) {
+  background-color: var(--claude-table-row-alt);
+}
+
+/* テーブルホバー効果 */
+tr:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+/* 画像 */
+img {
+  max-width: 100%;
+  height: auto;
+  page-break-inside: avoid;
+  border-radius: 4px;
+  display: block;
+  margin: 1em auto;
+}
+
+/* 水平線 */
+hr {
+  border: 0;
+  border-top: 1px solid var(--claude-border);
+  margin: 1.5em 0;
+  height: 1px;
+}
+
+/* 選択テキスト */
+::selection {
+  background-color: rgba(93, 96, 239, 0.15);
+  color: var(--claude-text);
+}
+
+/* 印刷ボタン */
+.print-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: var(--claude-link);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--claude-font-primary);
+  font-weight: 500;
+  font-size: var(--claude-font-size-sm);
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.15s ease;
+}
+
+.print-button:hover {
+  background-color: var(--claude-hover);
+}
+
+.print-button:active {
+  background-color: var(--claude-active);
+  transform: translateY(1px);
+}
+
+/* 小さなコンポーネント */
+small, .text-small {
+  font-size: var(--claude-font-size-xs);
+  line-height: 1.4;
+  color: var(--claude-text-secondary);
+}
+
+/* 太字のスタイルを強化 */
+strong, b {
+  font-weight: 700; /* 600から700に変更してより太く */
+  color: var(--claude-text); /* 確実に基本テキスト色を使用 */
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* キーボードキー表示 */
+kbd {
+  font-family: var(--claude-font-code);
+  background-color: var(--claude-code-bg);
+  border: 1px solid var(--claude-border);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  padding: 0.1em 0.4em;
+  font-size: var(--claude-font-size-xs);
+  line-height: 1;
+}
+
+/* 数式表示 - MathJax互換性 */
+.math {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.math-inline {
+  display: inline-block;
+  margin: 0 0.15em;
+  vertical-align: middle;
+}
+
+.math-display {
+  display: block;
+  margin: 0.8em 0;
+  text-align: center;
+}
+
+/* Claude風のボックス用スタイル */
+.claude-box {
+  background-color: #f3f3f3;
+  border: 1px solid var(--claude-border);
+  border-radius: 6px;
+  padding: 16px;
+  margin: 0.8em 0;
+  position: relative;
+  font-family: var(--claude-font-primary);
+  font-size: var(--claude-font-size-base);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+/* コピーボタン */
+.claude-box-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background-color: var(--claude-light-bg);
+  color: var(--claude-text-secondary);
+  border: 1px solid var(--claude-border);
+  border-radius: 4px;
+  font-size: var(--claude-font-size-xs);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.claude-box-copy:hover {
+  background-color: var(--claude-link);
+  color: white;
+  border-color: var(--claude-link);
+}
+
+.claude-box-copy:active {
+  transform: translateY(1px);
+}
+
+/* 印刷スタイル */
+@media print {
+  body {
+    max-width: 100%;
+    margin: 0;
+    padding: 0.5cm;
+    font-size: 12pt;
+    background-color: white !important;
+    color: black !important;
+    width: 21cm; /* A4幅 */
+  }
+  
+  .claude-markdown-content {
+    background-color: white !important;
+    box-shadow: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  pre, code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9 !important;
+  }
+  
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+  
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+  
+  .no-print { 
+    display: none; 
+  }
+  
+  /* 印刷時の改ページ制御 */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  p, blockquote, ul, ol, dl, pre {
+    page-break-inside: avoid;
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+
+  table, figure, img {
+    page-break-inside: avoid;
+  }
+}
+
+/* ダークモードサポート - 色調整 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --claude-bg: #141414;
+    --claude-text: #e8e8e8;
+    --claude-text-secondary: #b0b0b0;
+    --claude-text-tertiary: #909090;
+    --claude-border: #3a3a3a;
+    --claude-border-light: #333333;
+    --claude-border-focus: #4d4d4d;
+    --claude-code-bg: #222222;
+    --claude-code-border: #3a3a3a;
+    --claude-link: #818cff;
+    --claude-hover: #9ca3ff;
+    --claude-active: #6a77ff;
+    --claude-focus: #8e96ff;
+    --claude-pre-bg: #222222;
+    --claude-message-bg: #1d1d1d;
+    --claude-message-shadow: rgba(0, 0, 0, 0.2);
+    --claude-blockquote-bg: #242424;
+    --claude-table-header-bg: #2a2a2a;
+    --claude-table-row-alt: #242424;
+    
+    /* ダークモードシンタックスハイライト */
+    --claude-syntax-keyword: #ff7b72;
+    --claude-syntax-entity: #d2a8ff;
+    --claude-syntax-constant: #79c0ff;
+    --claude-syntax-string: #a5d6ff;
+    --claude-syntax-variable: #ffa657;
+    --claude-syntax-comment: #8b949e;
+    --claude-syntax-tag: #7ee787;
+    --claude-syntax-attribute: #79c0ff;
+  }
+  
+  body {
+    color: var(--claude-text);
+    background-color: var(--claude-bg);
+  }
+  
+  /* ダークモードでの選択テキスト */
+  ::selection {
+    background-color: rgba(129, 140, 255, 0.25);
+    color: var(--claude-text);
+  }
+  
+  /* テーブルのダークモード調整 */
+  th {
+    background-color: var(--claude-table-header-bg);
+    color: var(--claude-text);
+  }
+  
+  tr:nth-child(even) {
+    background-color: var(--claude-table-row-alt);
+  }
+  
+  tr:hover {
+    background-color: rgba(255,255,255,0.03);
+  }
+  
+  blockquote {
+    color: var(--claude-text-secondary);
+    background-color: var(--claude-blockquote-bg);
+  }
+  
+  code {
+    color: var(--claude-text);
+    background-color: var(--claude-code-bg);
+  }
+  
+  /* ダークモードでの画像調整 - より優しい */
+  img {
+    opacity: 0.9;
+    filter: brightness(0.95);
+  }
+  
+  /* ダークモードでのClaude風ボックスの調整 */
+  .claude-box {
+    background-color: #242424;
+    border-color: var(--claude-border);
+  }
+  
+  .claude-box-copy {
+    background-color: var(--claude-message-bg);
+    color: var(--claude-text-secondary);
+    border-color: var(--claude-border);
+  }
+  
+  .claude-box-copy:hover {
+    background-color: var(--claude-link);
+    color: white;
+    border-color: var(--claude-link);
+  }
+}
+    </style>
+    <script>
+        function copyClaudeBox(id) {
+            const box = document.getElementById(`claude-box-${id}`);
+            const preText = box.querySelector('pre').innerText;
+            
+            // テキストをクリップボードにコピー
+            navigator.clipboard.writeText(preText).then(() => {
+                // コピー成功表示
+                const copyBtn = box.querySelector('.claude-box-copy');
+                const originalText = copyBtn.innerText;
+                copyBtn.innerText = 'コピー完了';
+                copyBtn.style.backgroundColor = 'var(--claude-success)';
+                copyBtn.style.color = 'white';
+                
+                // 2秒後に元に戻す
+                setTimeout(() => {
+                    copyBtn.innerText = originalText;
+                    copyBtn.style.backgroundColor = '';
+                    copyBtn.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('コピーに失敗しました:', err);
+                alert('コピーに失敗しました。');
+            });
+        }
+    </script>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">印刷</button>
+    <div class="claude-markdown-content">
+        <h1 id="栄養教諭のための生成AI活用研修教材">栄養教諭のための生成AI活用研修教材</h1>
+<h2 id="1_生成AIとは何か">1. 生成AIとは何か？</h2>
+<h3 id="生成AIの基本概念">生成AIの基本概念</h3>
+<p>生成AI（Generative AI）とは、テキスト、画像、音声などのコンテンツを自動的に生成する人工知能技術です。大量のデータから学習し、人間のような自然な文章や創造的なコンテンツを作り出すことができます。</p>
+<h3 id="主な生成AIツール">主な生成AIツール</h3>
+<h4 id="ChatGPTOpenAI">ChatGPT（OpenAI）</h4>
+<ul>
+<li><strong>特徴：</strong> 最も普及している対話型AI。幅広い質問に対応</li>
+<li><strong>活用例：</strong> 献立作成、食育指導案作成、保護者向け資料</li>
+<li><strong>アクセス：</strong> https://chat.openai.com （無料版あり、有料版月額20ドル）</li>
+</ul>
+<h4 id="ClaudeAnthropic">Claude（Anthropic）</h4>
+<ul>
+<li><strong>特徴：</strong> 長文作成が得意。複雑な分析や推論に強い</li>
+<li><strong>活用例：</strong> 食育カリキュラム開発、給食運営の課題分析</li>
+<li><strong>アクセス：</strong> https://claude.ai （無料版あり、有料版月額20ドル）</li>
+</ul>
+<h4 id="GeminiGoogle">Gemini（Google）</h4>
+<ul>
+<li><strong>特徴：</strong> リアルタイム情報取得。Google Workspaceとの連携</li>
+<li><strong>活用例：</strong> 最新栄養情報収集、Google Sheetsでの献立管理</li>
+<li><strong>アクセス：</strong> https://gemini.google.com （Googleアカウントで利用）</li>
+</ul>
+<h4 id="Microsoft_Copilot">Microsoft Copilot</h4>
+<ul>
+<li><strong>特徴：</strong> Office製品との統合。セキュリティ機能が充実</li>
+<li><strong>活用例：</strong> Excel栄養計算、PowerPoint授業資料、Word文書作成</li>
+<li><strong>アクセス：</strong> https://copilot.microsoft.com （Microsoftアカウントで利用）</li>
+</ul>
+<h3 id="選び方のポイント">選び方のポイント</h3>
+<ul>
+<li><strong>文章作成重視</strong> → ChatGPT、Claude</li>
+<li><strong>Office連携</strong> → Microsoft Copilot</li>
+<li><strong>最新情報収集</strong> → Gemini</li>
+</ul>
+<p><strong>推奨：</strong> まずは無料版で試用し、さらに頻繁に活用したければポリシーを確認してから有料版を使用</p>
+<h3 id="生成AIでできること">生成AIでできること</h3>
+<ul>
+<li>文章の作成・要約・翻訳</li>
+<li>資料・教材の作成支援</li>
+<li>質問への回答・情報検索</li>
+<li>アイデアの提案・企画立案</li>
+<li>データの分析・整理</li>
+</ul>
+<h2 id="2_プロンプトとは効果的な使い方">2. プロンプトとは？効果的な使い方</h2>
+<h3 id="プロンプトの基本">プロンプトの基本</h3>
+<p>プロンプトとは、生成AIに対する「指示文」のことです。どのような回答や結果を求めているかを明確に伝えることで、より良い結果を得ることができます。</p>
+<h3 id="21_効果的なプロンプトの4つの基本要素">2-1. 効果的なプロンプトの4つの基本要素</h3>
+<p>生成AIを活用するためには、以下の4つの要素を意識することが重要です。これらは一度に完璧に含める必要はありませんが、質の高い回答を得るための基準として理解しておきましょう。</p>
+<h4 id="要素1具体的で明確な指示">要素1：具体的で明確な指示</h4>
+<p>専門性の高い回答を得るために、求める内容を明確に指定します。</p>
+<p>❌ <strong>不十分な例：</strong>「給食について教えて」</p>
+<p>✅ <strong>効果的な例：</strong>「小学校3年生280名を対象とした、鉄分強化をテーマとする1週間の給食献立を、栄養価計算とともに作成してください」</p>
+<h4 id="要素2背景情報制約条件">要素2：背景情報・制約条件</h4>
+<p>実務に即した回答を得るために、必要な条件や制約を具体的に提示します。</p>
+<p><strong>例：</strong> 栄養教諭として○○小学校（児童数300名）で勤務しています。</p>
+<p>今月のテーマは「地産地消」で、地元農家との連携企画です。</p>
+<p><strong>制約条件：</strong></p>
+<ul>
+<li>予算：1食あたり280円以内</li>
+<li>アレルギー対応：卵・乳製品アレルギー児童5名</li>
+<li>調理設備：スチームコンベクション×2台、回転釜×3台</li>
+<li>納期：来週金曜日までに献立決定</li>
+</ul>
+<h4 id="要素3求める出力形式構造">要素3：求める出力形式・構造</h4>
+<p>業務で直接活用できる形式を指定します。</p>
+<p><strong>文書・資料形式：</strong></p>
+<ul>
+<li>「保護者向けお便り用の文章として」</li>
+<li>「食育指導案として導入・展開・まとめの構成で」</li>
+<li>「調理手順書として作業工程を明記して」</li>
+</ul>
+<p><strong>表・リスト形式：</strong></p>
+<ul>
+<li>「栄養価計算を含む献立表形式で」</li>
+<li>「箇条書きで」</li>
+<li>「階層箇条書きで」（PowerPointにコピー&ペースト用）</li>
+<li>「チェックリスト形式で」</li>
+</ul>
+<p><strong>その他：</strong></p>
+<ul>
+<li>「Q&A形式で」</li>
+<li>「会話例として」</li>
+</ul>
+<h4 id="要素4専門的役割視点の設定">要素4：専門的役割・視点の設定</h4>
+<p>プロンプトの最初に記述すると効果的。</p>
+<h3 id="4つの要素をすべて含むプロンプトの例">4つの要素をすべて含むプロンプトの例</h3>
+<h4 id="例1給食献立作成">例1：給食献立作成</h4>
+<p>あなたは学校栄養教諭です。<strong>【要素4：役割設定】</strong></p>
+<p>○○小学校（児童数350名）で勤務しており、来月のテーマは「カルシウム強化」です。</p>
+<p><strong>制約条件：</strong></p>
+<ul>
+<li>予算：1食あたり300円以内</li>
+<li>アレルギー対応：卵・乳製品アレルギー児童8名</li>
+<li>調理設備：スチームコンベクション×2台、回転釜×3台</li>
+<li>納期：今週金曜日までに献立決定<strong>【要素2：背景情報・制約条件】</strong></li>
+</ul>
+<p>小学校4年生を対象とした、カルシウム不足を改善するための1週間の給食献立を作成してください。<strong>【要素1：具体的で明確な指示】</strong></p>
+<p>栄養価計算を含む献立表形式で提示してください。<strong>【要素3：出力形式】</strong></p>
+<h4 id="例2食育指導案作成">例2：食育指導案作成</h4>
+<p>あなたは食育指導の専門家であり、心理学の専門性を備えたコーチングのプロです。<strong>【要素4：役割設定】</strong></p>
+<p>私は△△小学校の栄養教諭で、来月の食育授業を担当します。</p>
+<p><strong>対象：</strong> 小学校2年生30名のクラス</p>
+<p><strong>課題：</strong> 野菜嫌いの児童が多く、給食の野菜料理の残食率が40%</p>
+<p><strong>時間：</strong> 45分授業</p>
+<p><strong>使用教室：</strong> 多目的室（グループ活動可能）<strong>【要素2：背景情報・制約条件】</strong></p>
+<p>「野菜と仲良くなろう」をテーマとした参加型の食育授業案を作成してください。児童の野菜に対する興味を引き出し、実際に食べてみたくなるような内容にしてください。<strong>【要素1：具体的で明確な指示】</strong></p>
+<p>導入・展開・まとめの構成で、時間配分と準備物も含めて整理してください。<strong>【要素3：出力形式】</strong></p>
+<h3 id="22_対話による回答の改善">2-2. 対話による回答の改善</h3>
+<p>実務では、初回のプロンプトでは完璧な答えが得られないことが多いため、対話を通じて段階的により実用的な内容に調整していくことが効果的です。</p>
+<h4 id="対話の主な目的">対話の主な目的</h4>
+<ul>
+<li>内容をより具体的にする</li>
+<li>実務の制約に合わせて調整する</li>
+<li>異なる用途に展開する</li>
+</ul>
+<h4 id="実際の対話例給食献立作成">実際の対話例：給食献立作成</h4>
+<p><strong>【初回プロンプト】</strong></p>
+<p>「栄養教諭として、小学校3年生300名の1週間給食献立を作成してください。</p>
+<p>予算は1食280円、卵アレルギー対応が必要です。献立表形式でお願いします。」</p>
+<p><strong>【対話1：具体的な改善】</strong></p>
+<p>「この献立で栄養バランスに問題がある日があれば、具体的な改善方法を教えてください」</p>
+<p><strong>【対話2：実務制約への対応】</strong></p>
+<p>「調理時間が午前中2時間に限られています。時間短縮できる調理法に変更してください」</p>
+<p><strong>【対話3：別用途への展開】</strong></p>
+<p>「この献立の特徴を保護者向けお便り用の文章にしてください」</p>
+<p>このように対話を重ねることで、一つの回答をより実用的で多角的な内容に発展させることができます。</p>
+<h3 id="23_実務での効果的なプロンプト作成手順">2-3. 実務での効果的なプロンプト作成手順</h3>
+<h4 id="手順14つの要素を含む初回プロンプトを作成">手順1：4つの要素を含む初回プロンプトを作成</h4>
+<ul>
+<li>具体的な指示を明確にする</li>
+<li>必要な背景情報・制約を整理する</li>
+<li>望む出力形式を指定する</li>
+<li>適切な役割・視点を設定する</li>
+</ul>
+<h4 id="手順2AIの回答を評価">手順2：AIの回答を評価</h4>
+<ul>
+<li>求めていた内容が含まれているか確認</li>
+<li>実務で使用する際の課題を特定</li>
+<li>不足している情報や改善点を洗い出し</li>
+</ul>
+<h4 id="手順3目的に応じた対話で改善">手順3：目的に応じた対話で改善</h4>
+<ul>
+<li><strong>内容改善：</strong> より実用的で精度の高い内容に調整</li>
+<li><strong>視点展開：</strong> 異なる用途や対象者向けに展開</li>
+<li><strong>実装詳細：</strong> 実際の実施方法を具体化</li>
+</ul>
+<h4 id="手順4専門知識による最終確認">手順4：専門知識による最終確認</h4>
+<ul>
+<li>栄養学的な正確性を検証</li>
+<li>現場の実情に合っているか確認</li>
+<li>必要に応じて追加の対話で微調整</li>
+</ul>
+<h3 id="24_実務レベルでの対話例">2-4. 実務レベルでの対話例</h3>
+<h4 id="例1給食運営改善プロジェクト">例1：給食運営改善プロジェクト</h4>
+<p><strong>【初回プロンプト】</strong></p>
+<p>「栄養教諭として、小学校350名規模での給食残食率改善プロジェクトを企画しています。現在の残食率は平均15%で、特に野菜料理で25%と高くなっています。3ヶ月間で残食率を10%以下に改善する具体的な戦略とアクションプランを、実施可能性と効果測定方法を含めて提案してください。」</p>
+<p><strong>【対話1】</strong>「提案された戦略のうち、最も効果が期待できる上位3つについて、実施手順と必要リソース、期待される効果を詳しく説明してください」</p>
+<p><strong>【対話2】</strong>「野菜料理の残食率改善に特化して、調理法の改善、盛り付け方法、食育との連携を含む包括的なアプローチを設計してください」</p>
+<p><strong>【対話3】</strong>「このプロジェクトの進捗管理と効果測定のためのKPIと測定方法、報告書の作成方法を教えてください」</p>
+<h4 id="例2食育カリキュラム開発">例2：食育カリキュラム開発</h4>
+<p><strong>【初回プロンプト】</strong></p>
+<p>「あなたは学校の栄養教諭です。小学校全学年を対象とした年間食育カリキュラムを開発しています。学習指導要領に準拠し、発達段階に応じた内容で、家庭・地域との連携も含む包括的なプログラムを設計してください。各学年月1回45分授業、年間評価方法も含めて提案してください。」</p>
+<p><strong>【対話1】</strong>「3年生のカリキュラムを詳細化して、各回の学習目標、指導内容、使用教材、評価規準を具体的に示してください」</p>
+<p><strong>【対話2】</strong>「家庭との連携部分について、保護者向け資料、家庭での実践課題、親子参加型活動の具体案を作成してください」</p>
+<p><strong>【対話3】</strong>「このカリキュラムの教育効果を測定するための評価ツールと年間評価スケジュールを設計してください」</p>
+<h2 id="3_栄養教諭の業務への活用方法">3. 栄養教諭の業務への活用方法</h2>
+<h3 id="31_献立作成支援">3-1. 献立作成支援</h3>
+<h4 id="基本的な献立提案">基本的な献立提案</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。小学校の給食で、鉄分不足を改善するための1週間献立を作成してください。</p>
+<ul>
+<li><strong>対象：</strong> 小学校低学年（1-3年生）</li>
+<li><strong>予算：</strong> 1食280円以内</li>
+<li><strong>条件：</strong> 鉄分を多く含む食材を効果的に使用</li>
+<li><strong>形式：</strong> 献立表形式で栄養価も併記」</li>
+</ul>
+<h4 id="季節行事に合わせた献立">季節・行事に合わせた献立</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。秋の食育週間に合わせた特別献立を提案してください。</p>
+<ul>
+<li><strong>テーマ：</strong> 収穫の秋を感じる献立</li>
+<li><strong>使用食材：</strong> さつまいも、きのこ類、りんごを必ず含める</li>
+<li><strong>注意点：</strong> 食物アレルギー対応（卵・乳・小麦）</li>
+<li><strong>付属資料：</strong> 食材の栄養価説明も含める」</li>
+</ul>
+<h3 id="32_食育指導教材の作成">3-2. 食育指導教材の作成</h3>
+<h4 id="学年別食育資料">学年別食育資料</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは食育指導の専門家であり、心理学の専門性を備えたコーチングのプロです。小学校4年生向けの『バランスの良い食事』について説明する資料を作成してください。</p>
+<ul>
+<li><strong>形式：</strong> パワーポイント用のスライド内容</li>
+<li><strong>内容：</strong> 主食・主菜・副菜の役割をわかりやすく</li>
+<li><strong>工夫：</strong> クイズや参加型の要素を含める</li>
+<li><strong>時間：</strong> 15分程度の授業用」</li>
+</ul>
+<h4 id="家庭向け食育だより">家庭向け食育だより</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。保護者向けの食育だよりを作成してください。</p>
+<ul>
+<li><strong>テーマ：</strong> 朝食の重要性</li>
+<li><strong>対象：</strong> 小学生の保護者</li>
+<li><strong>内容：</strong> 朝食を食べるメリット、簡単朝食レシピ3つ</li>
+<li><strong>文量：</strong> A4用紙1枚程度</li>
+<li><strong>トーン：</strong> 親しみやすく、実践しやすい内容で」</li>
+</ul>
+<h3 id="33_栄養指導相談対応">3-3. 栄養指導・相談対応</h3>
+<h4 id="個別指導計画">個別指導計画</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。肥満傾向にある小学校5年生の児童への栄養指導計画を立ててください。</p>
+<ul>
+<li><strong>現状：</strong> 身長140cm、体重45kg</li>
+<li><strong>目標：</strong> 3ヶ月で2kg減量</li>
+<li><strong>方法：</strong> 食事指導中心（運動は別途指導）</li>
+<li><strong>配慮：</strong> 本人の自尊心を傷つけない指導方法</li>
+<li><strong>形式：</strong> 月次の指導計画表」</li>
+</ul>
+<h4 id="保護者相談への回答案">保護者相談への回答案</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。『子どもが野菜を全く食べません』という保護者からの相談に対する回答を作成してください。</p>
+<ul>
+<li><strong>対象：</strong> 小学校2年生の保護者</li>
+<li><strong>課題：</strong> 野菜嫌いで栄養バランスが心配</li>
+<li><strong>求める内容：</strong> 具体的で実践可能なアドバイス</li>
+<li><strong>トーン：</strong> 共感的で前向きな内容</li>
+<li><strong>分量：</strong> 相談回答書として適切な長さ」</li>
+</ul>
+<h3 id="34_給食管理業務の効率化">3-4. 給食管理業務の効率化</h3>
+<h4 id="発注計画の最適化">発注計画の最適化</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは給食管理の実務担当者です。来月の給食食材発注計画を最適化してください。</p>
+<ul>
+<li><strong>提供食数：</strong> 1日350食×20日間</li>
+<li><strong>重点食材：</strong> 地元産野菜を30%以上使用</li>
+<li><strong>予算制約：</strong> 月間総額200万円以内</li>
+<li><strong>考慮事項：</strong> 食材の保存期間、納期、品質</li>
+<li><strong>出力形式：</strong> 週次発注スケジュール表」</li>
+</ul>
+<h4 id="衛生管理チェックリスト">衛生管理チェックリスト</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは給食管理の実務担当者です。学校給食の衛生管理チェックリストを作成してください。</p>
+<ul>
+<li><strong>対象：</strong> 調理員向けの日次チェック項目</li>
+<li><strong>内容：</strong> 文部科学省の学校給食衛生管理基準に準拠</li>
+<li><strong>形式：</strong> チェックボックス付きの表形式</li>
+<li><strong>項目数：</strong> 実用的な範囲（20-30項目程度）」</li>
+</ul>
+<h3 id="35_研修会議資料の作成">3-5. 研修・会議資料の作成</h3>
+<h4 id="職員研修資料">職員研修資料</h4>
+<p><strong>プロンプト例：</strong></p>
+<p>「あなたは学校栄養教諭です。給食調理員向けの食物アレルギー対応研修資料を作成してください。</p>
+<ul>
+<li><strong>研修時間：</strong> 60分</li>
+<li><strong>内容：</strong> 基礎知識、実践的な対応方法、緊急時対応</li>
+<li><strong>形式：</strong> 講義用スライド（15-20枚程度）</li>
+<li><strong>重点：</strong> 実際の調理現場での注意点</li>
+<li><strong>目標：</strong> アレルギー事故ゼロの意識向上」</li>
+</ul>
+<h3 id="36_効果的な活用のコツ">3-6. 効果的な活用のコツ</h3>
+<h4 id="適切な活用場面">適切な活用場面</h4>
+<ul>
+<li><strong>一般的な情報に活用：</strong> 基本的な栄養知識の確認や文章作成支援</li>
+<li><strong>創作的な作業に活用：</strong> 献立のアイデア出し、授業案の骨子作り</li>
+<li><strong>信頼できる情報源の案内：</strong> 公的機関の資料や基準の参照方法</li>
+</ul>
+<h4 id="段階的活用の手順">段階的活用の手順</h4>
+<ol>
+<li><strong>アイデア集め：</strong> 「こんな方法もあるんだ」という発見</li>
+<li><strong>下書き作成：</strong> たたき台として活用</li>
+<li><strong>内容確認：</strong> 専門知識でチェック</li>
+<li><strong>完成：</strong> 現場に合わせて最終調整</li>
+</ol>
+<h4 id="職場での情報共有">職場での情報共有</h4>
+<ul>
+<li>良いプロンプトの書き方を職場でシェア</li>
+<li>成功事例を蓄積していく</li>
+<li>間違いの事例も共有して注意喚起</li>
+<li>最終判断は必ず栄養教諭が行う</li>
+</ul>
+<h2 id="4_使う時の注意点">4. 使う時の注意点</h2>
+<h3 id="41_生成AIの仕組みと限界">4-1. 生成AIの仕組みと限界</h3>
+<h4 id="生成AIはどのように答えを作るのか">生成AIはどのように答えを作るのか</h4>
+<p>生成AIは<strong>「次に来る言葉を予測する」</strong>技術です。大量の文章データから学習し、統計的に「この文脈なら次はこの言葉が来る可能性が高い」を計算して文章を生成します。</p>
+<p><strong>例：</strong></p>
+<ul>
+<li>「栄養バランスの良い食事は」→「健康に良い」（高確率）</li>
+<li>「小学生の給食で人気なのは」→「カレーライス」（高確率）</li>
+</ul>
+<h4 id="ハルシネーション誤った情報の生成">ハルシネーション（誤った情報の生成）</h4>
+<p><strong>ハルシネーションとは：</strong> 生成AIがもっともらしいが事実ではない情報を作り出してしまうことです。</p>
+<p><strong>発生理由：</strong></p>
+<ul>
+<li>AIは「正しさ」ではなく「文章の自然さ」を重視</li>
+<li>学習データにない情報は「推測」で補完</li>
+<li>数値や固有名詞で特に起こりやすい</li>
+</ul>
+<p><strong>栄養教諭業務での危険な例：</strong></p>
+<ul>
+<li>「ほうれん草100gの鉄分含有量は15.2mg」（実際は2.0mg程度）</li>
+<li>「○○地域の学校給食法では卵の使用が禁止」（存在しない法律）</li>
+<li>「△△式栄養計算法で計算すると...」（存在しない計算法）</li>
+</ul>
+<h3 id="42_情報の正確性確保">4-2. 情報の正確性確保</h3>
+<h4 id="数値情報の扱い方">数値情報の扱い方</h4>
+<p><strong>推奨する方法：</strong></p>
+<ul>
+<li>「ほうれん草の鉄分含有量について、信頼できる公的機関のウェブサイトを検索して、情報源のURLとともに教えてください」</li>
+<li>「鉄分の多い食材について調べて、参考にした情報源のURLを明示してください」</li>
+</ul>
+<p><strong>検索機能付きAIの活用：</strong></p>
+<ul>
+<li>ChatGPT（Plus版以上で検索機能あり）、Claude（検索機能あり）、Gemini（Google検索連携）、Copilot（検索機能あり）を使用</li>
+</ul>
+<p><strong>検索機能の確認と強制実行方法：</strong></p>
+<ul>
+<li><strong>ChatGPT：</strong> 入力欄横の地球儀マークをクリックすると検索機能が有効になる（青く光る）</li>
+<li><strong>ChatGPT：</strong> 入力欄に「/」（半角スラッシュ）を入力すると検索オプションが表示される</li>
+<li><strong>Claude：</strong> 「インターネットで調べて教えてください」「最新の情報を調べて教えてください」と明示的に依頼</li>
+<li><strong>Gemini・Copilot：</strong> 設定で検索機能を常時有効にできる場合がある</li>
+<li>回答にウェブサイトのリンクや「検索しました」などの表示があるかチェック</li>
+<li>検索されていない場合は上記方法を試すか、別のAIツールを使用</li>
+</ul>
+<p><strong>信頼性の高い情報源に限定する方法：</strong></p>
+<ul>
+<li>「文部科学省や厚生労働省などの公的機関のサイトから情報を調べて教えてください」</li>
+<li>「査読付き学術論文（peer-reviewed論文）から最新の研究結果を調べてください」</li>
+<li>「政府機関、WHO、日本栄養士会などの公的・専門機関の情報のみを参照して調べてください」</li>
+<li>「学術データベース（PubMed、J-STAGE等）から論文情報を調べてください」</li>
+<li><strong>プロンプト例：</strong> 「小児の鉄分不足について、厚生労働省や査読付き学術論文の情報のみを使って調べてください」</li>
+</ul>
+<p><strong>回答に表示されるリンク先を手動で確認</strong></p>
+<ul>
+<li>公的機関（文部科学省、厚生労働省等）の情報を優先</li>
+</ul>
+<h4 id="必ず確認すべき情報">必ず確認すべき情報</h4>
+<ul>
+<li><strong>栄養価の計算：</strong> 栄養計算ソフトで再確認</li>
+<li><strong>食品成分表との照合：</strong> 最新の日本食品標準成分表で確認</li>
+<li><strong>アレルギー情報：</strong> 医学的根拠のある資料で再確認</li>
+<li><strong>法的基準：</strong> 文部科学省の学校給食実施基準等で確認</li>
+</ul>
+<h3 id="43_個人情報保護">4-3. 個人情報保護</h3>
+<h4 id="入力してはいけない情報">入力してはいけない情報</h4>
+<ul>
+<li><strong>児童・生徒の氏名：</strong> 「田中太郎くん」→「小学3年生の男児」</li>
+<li><strong>個人の健康情報：</strong> 「○○さんの血液検査結果」→「一般的な貧血傾向の児童」</li>
+<li><strong>学校名・施設名：</strong> 「△△小学校」→「小学校」</li>
+<li><strong>詳細な地域情報：</strong> 「○○市○○町」→「地方都市」</li>
+</ul>
+<h4 id="個人情報を保護する対策">個人情報を保護する対策</h4>
+<p><strong>基本原則：</strong> 個人を特定できる情報は一切入力しない</p>
+<h4 id="1_技術的な保護設定">1. 技術的な保護設定</h4>
+<p><strong>ChatGPT（無料版・Plus）：</strong></p>
+<ul>
+<li>設定画面の「データコントロール」で「すべての人のためにモデルを改善する」をオフにする</li>
+<li>この設定により入力データが学習に使用されなくなる</li>
+<li>チャット履歴は保存されるが、モデル学習には使用されない</li>
+</ul>
+<p><strong>ChatGPT Enterprise・Team（法人版）：</strong></p>
+<ul>
+<li>デフォルトで入力データが学習に使用されない</li>
+<li>高度なセキュリティ機能（SSO、データ暗号化等）を標準搭載</li>
+</ul>
+<p><strong>Claude：</strong></p>
+<ul>
+<li>Claude.ai（無料・Pro版）：入力データがサービス改善に使用される可能性あり</li>
+<li>Claude API：入力データはモデル学習に使用されない</li>
+</ul>
+<p><strong>Copilot：</strong></p>
+<ul>
+<li>無料版：データが学習に使用される可能性あり</li>
+<li>Microsoft 365版（企業・教育機関）：職場アカウントでログインすれば学習に使用されない</li>
+</ul>
+<p><strong>Gemini：</strong></p>
+<ul>
+<li>デフォルトでは入力内容が学習に使用される</li>
+<li>設定でオプトアウト可能（詳細は各サービスで確認）</li>
+</ul>
+<p><strong>重要：</strong> 設定方法は随時変更される可能性があるため、利用前に各サービスの最新のプライバシー設定を確認してください。</p>
+<h4 id="2_情報の抽象化">2. 情報の抽象化</h4>
+<ul>
+<li><strong>悪い例：</strong> 「3年2組の児童が給食を残します」</li>
+<li><strong>良い例：</strong> 「小学校中学年で給食摂取に課題のある児童について」</li>
+</ul>
+<h4 id="3_統計的な表現">3. 統計的な表現</h4>
+<ul>
+<li><strong>悪い例：</strong> 「田中さんの身長・体重データ」</li>
+<li><strong>良い例：</strong> 「同学年平均と比較して低身長傾向の児童」</li>
+</ul>
+<h4 id="4_仮想的な事例設定">4. 仮想的な事例設定</h4>
+<ul>
+<li>実際の事例ではなく、一般的な課題として相談</li>
+<li><strong>例：</strong> 「一般的に、○○のような状況の児童にはどのような栄養指導が有効ですか？」</li>
+</ul>
+<h4 id="5_学校で相談してから利用">5. 学校で相談してから利用</h4>
+<ul>
+<li>学校の情報セキュリティポリシーを確認</li>
+<li>教育委員会のガイドラインがあれば遵守</li>
+</ul>
+<h3 id="44_著作権の遵守">4-4. 著作権の遵守</h3>
+<h4 id="注意すべき著作物">注意すべき著作物</h4>
+<ul>
+<li>他校の給食レシピや献立のそのままの転用</li>
+<li>市販の食育教材や専門書籍の内容</li>
+<li>インターネット上の画像や専門書の図表</li>
+</ul>
+<h2 id="5_まとめ">5. まとめ</h2>
+<p>生成AIは栄養教諭の皆さんの強い味方になります。人とお話しするように、気軽に相談してみてください。</p>
+<h3 id="成功のポイント">成功のポイント：</h3>
+<ul>
+<li>最初は簡単なお願いから始める</li>
+<li>会話しながら答えを良くしていく</li>
+<li>必ず専門知識でチェックする</li>
+<li>個人情報には十分注意する</li>
+</ul>
+<h3 id="こんな時に便利">こんな時に便利：</h3>
+<ul>
+<li>献立のアイデアがほしい時</li>
+<li>保護者向けの文章を作る時</li>
+<li>食育授業の準備をする時</li>
+<li>調理方法を工夫したい時</li>
+</ul>
+<p>AIと栄養教諭の専門性を組み合わせて、子どもたちのためのより良い給食と食育を実現していきましょう。</p>
+<h3 id="研修後にやってみること">研修後にやってみること</h3>
+<ul>
+<li>まずは簡単な質問から実際に試してみる</li>
+<li>人と会話するようにAIと対話を重ねてみる（一問一答ではなく）</li>
+<li>普段の業務で活用できる場面を3つ見つける</li>
+<li>良いお願いの仕方を同僚と共有する</li>
+<li>定期的に新しい使い方を学ぶ</li>
+</ul>
+    </div>
+</body>
+</html>
